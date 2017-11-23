@@ -25,7 +25,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         let cell:StudentsTableViewCell = self.studentsTableView.dequeueReusableCell(withIdentifier: "StudentsTableViewCell") as! StudentsTableViewCell!
         
         // set the text from the data model
-        cell.nameLabel.text = self.studentsInformations[indexPath.row].firstName
+        cell.nameLabel.text = self.studentsInformations[indexPath.row].firstName! + " " +  self.studentsInformations[indexPath.row].lastName!
         cell.linkLabel.text = self.studentsInformations[indexPath.row].mediaUrl
         
         return cell
@@ -38,6 +38,12 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         currentCell?.isSelected = false
         
         print(studentsInformations[indexPath.row])
+        
+        if let url = URL(string: studentsInformations[indexPath.row].mediaUrl!) {
+            UIApplication.shared.open(url, options: [:])
+        }
+
+
     }
 
     
