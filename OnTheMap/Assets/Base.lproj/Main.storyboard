@@ -182,10 +182,26 @@
                     <view key="view" contentMode="scaleToFill" id="f3N-N2-ZEH">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="AZ4-ZN-HVx">
+                                <rect key="frame" x="0.0" y="-14.5" width="375" height="667"/>
+                            </mapView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="AZ4-ZN-HVx" firstAttribute="width" secondItem="f3N-N2-ZEH" secondAttribute="width" id="5LF-qa-FFZ"/>
+                            <constraint firstItem="AZ4-ZN-HVx" firstAttribute="height" secondItem="f3N-N2-ZEH" secondAttribute="height" id="6Kh-s7-d5r"/>
+                            <constraint firstItem="AZ4-ZN-HVx" firstAttribute="centerY" secondItem="eQd-MG-6hP" secondAttribute="centerY" id="9Ik-uq-9v2"/>
+                            <constraint firstItem="AZ4-ZN-HVx" firstAttribute="leading" secondItem="eQd-MG-6hP" secondAttribute="leading" id="Oa0-WX-rJq"/>
+                            <constraint firstItem="AZ4-ZN-HVx" firstAttribute="height" secondItem="f3N-N2-ZEH" secondAttribute="height" id="PgO-KE-nuw"/>
+                            <constraint firstItem="eQd-MG-6hP" firstAttribute="trailing" secondItem="AZ4-ZN-HVx" secondAttribute="trailing" id="uIR-x1-DNM"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="eQd-MG-6hP"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="icon_mapview-deselected" id="A8n-GB-SXr"/>
+                    <connections>
+                        <outlet property="mapView" destination="AZ4-ZN-HVx" id="w5r-dv-6Tu"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wK3-sO-7th" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

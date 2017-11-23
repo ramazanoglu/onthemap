@@ -17,7 +17,7 @@ class ParseClient : NSObject {
             completionHandler(nil, error)
         }
         
-        let queryItems : [String : AnyObject] = ["limit" : "5" as AnyObject,
+        let queryItems : [String : AnyObject] = ["limit" : "20" as AnyObject,
                                                  "order" : "-updatedAt" as AnyObject]
         
         let url = createURLComponents(path: "/parse/classes/StudentLocation", queryItems: queryItems)
