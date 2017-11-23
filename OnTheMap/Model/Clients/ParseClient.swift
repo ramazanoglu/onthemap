@@ -55,7 +55,7 @@ class ParseClient : NSObject {
             
             for result in results {
                 
-                let studentInformation = StudentLocation.init(dictionary : result)
+                let studentInformation = StudentInformation.init(dictionary : result)
                 
                 print("\(studentInformation)")
                 

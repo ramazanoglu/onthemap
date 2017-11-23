@@ -19,7 +19,7 @@
 		227862D61FC5B808001A5A36 /* ParseClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227862D51FC5B808001A5A36 /* ParseClient.swift */; };
 		227862D81FC5B89D001A5A36 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227862D71FC5B89D001A5A36 /* MapViewController.swift */; };
 		227862DA1FC5B8AC001A5A36 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227862D91FC5B8AC001A5A36 /* ListViewController.swift */; };
-		227862DC1FC5D688001A5A36 /* StudentLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227862DB1FC5D688001A5A36 /* StudentLocation.swift */; };
+		227862DC1FC5D688001A5A36 /* StudentInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227862DB1FC5D688001A5A36 /* StudentInformation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,7 +58,7 @@
 		227862D51FC5B808001A5A36 /* ParseClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseClient.swift; sourceTree = "<group>"; };
 		227862D71FC5B89D001A5A36 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		227862D91FC5B8AC001A5A36 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
-		227862DB1FC5D688001A5A36 /* StudentLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentLocation.swift; sourceTree = "<group>"; };
+		227862DB1FC5D688001A5A36 /* StudentInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentInformation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,7 +151,7 @@
 			isa = PBXGroup;
 			children = (
 				226E0FB31FC57552008B7BCB /* Clients */,
-				227862DB1FC5D688001A5A36 /* StudentLocation.swift */,
+				227862DB1FC5D688001A5A36 /* StudentInformation.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -317,7 +317,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				227862DC1FC5D688001A5A36 /* StudentLocation.swift in Sources */,
+				227862DC1FC5D688001A5A36 /* StudentInformation.swift in Sources */,
 				226E0FB71FC58B7F008B7BCB /* GCDBlackBox.swift in Sources */,
 				227862D81FC5B89D001A5A36 /* MapViewController.swift in Sources */,
 				227862D61FC5B808001A5A36 /* ParseClient.swift in Sources */,

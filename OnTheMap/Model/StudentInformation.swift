@@ -1,5 +1,5 @@
 //
-//  StudentLocation.swift
+//  StudentInformation.swift
 //  OnTheMap
 //
 //  Created by Gokturk Ramazanoglu on 22.11.17.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct StudentLocation  {
+struct StudentInformation  {
     
     var createdAt:String?
     var firstName:String?
