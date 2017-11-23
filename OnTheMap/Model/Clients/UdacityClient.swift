@@ -23,7 +23,7 @@ class UdacityClient : NSObject {
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpBody = "{\"udacity\": {\"username\": \"\(username)\", \"password\": \"\(password)\"}}".data(using: .utf8)
-        var session = URLSession.shared
+        let session = URLSession.shared
         let task = session.dataTask(with: request) { data, response, error in
            
             if error != nil { // Handle error…

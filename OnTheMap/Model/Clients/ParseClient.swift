@@ -10,7 +10,7 @@ import Foundation
 
 class ParseClient : NSObject {
     
-    func getStudentLocations(completionHandler: @escaping(_ result: String?, _ error: String?) -> Void) {
+    func getStudentLocations(completionHandler: @escaping(_ result: [StudentInformation]?, _ error: String?) -> Void) {
         
         func sendError(_ error: String) {
             print(error)
@@ -53,18 +53,22 @@ class ParseClient : NSObject {
             
             let results = parsedResult["results"] as! [[String:AnyObject]]
             
+            var studentsArray = [StudentInformation]()
+            
             for result in results {
                 
                 let studentInformation = StudentInformation.init(dictionary : result)
                 
                 print("\(studentInformation)")
                 
+                studentsArray.append(studentInformation)
+                
             }
             
             print("*************************************")
             print(parsedResult)
             
-            //            completionHandler(String(data: data!, encoding: .utf8)!, nil)
+            completionHandler(studentsArray, nil)
         }
         task.resume()
         

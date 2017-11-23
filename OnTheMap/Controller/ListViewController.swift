@@ -8,11 +8,63 @@
 
 import UIKit
 
-class ListViewController: UIViewController {
+class ListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
+    @IBOutlet weak var studentsTableView: UITableView!
 
+    
+    var studentsInformations = [StudentInformation]()
+    
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        return studentsInformations.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell:StudentsTableViewCell = self.studentsTableView.dequeueReusableCell(withIdentifier: "StudentsTableViewCell") as! StudentsTableViewCell!
+        
+        // set the text from the data model
+        cell.nameLabel.text = self.studentsInformations[indexPath.row].firstName
+        cell.linkLabel.text = self.studentsInformations[indexPath.row].mediaUrl
+        
+        return cell
+
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let currentCell = tableView.cellForRow(at: indexPath)
+        currentCell?.isSelected = false
+        
+        print(studentsInformations[indexPath.row])
+    }
+
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        studentsTableView.delegate = self
+        studentsTableView.dataSource = self
+        
+        ParseClient.sharedInstance().getStudentLocations(completionHandler: { result, error in
+            
+            guard  error == nil else {
+                
+                return
+            }
+            
+            self.studentsInformations = result!
+            
+            
+            performUIUpdatesOnMain {
+                self.studentsTableView.reloadData()
+
+            }
+            
+        })
+        
         // Do any additional setup after loading the view.
     }
 

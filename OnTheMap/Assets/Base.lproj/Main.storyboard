@@ -105,10 +105,71 @@
                     <view key="view" contentMode="scaleToFill" id="iWI-CT-3LO">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="NCP-fe-L7Y">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="StudentsTableViewCell" rowHeight="60" id="tx5-kk-qtM" customClass="StudentsTableViewCell" customModule="OnTheMap" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="60"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="tx5-kk-qtM" id="7L7-02-7wt">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="59.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_pin" translatesAutoresizingMaskIntoConstraints="NO" id="SKo-yZ-jXo">
+                                                    <rect key="frame" x="16" y="15" width="30" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="30" id="7XN-K8-mio"/>
+                                                        <constraint firstAttribute="height" constant="30" id="qjO-6T-RNX"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2BV-I5-HT5">
+                                                    <rect key="frame" x="66" y="32" width="294" height="14.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zyz-hF-EXa">
+                                                    <rect key="frame" x="66" y="10" width="294" height="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="2BV-I5-HT5" firstAttribute="top" secondItem="Zyz-hF-EXa" secondAttribute="bottom" constant="5" id="2VN-tp-rsq"/>
+                                                <constraint firstItem="Zyz-hF-EXa" firstAttribute="top" secondItem="7L7-02-7wt" secondAttribute="top" constant="10" id="8je-HS-0bP"/>
+                                                <constraint firstItem="SKo-yZ-jXo" firstAttribute="leading" secondItem="7L7-02-7wt" secondAttribute="leading" constant="16" id="9xp-cj-eKI"/>
+                                                <constraint firstItem="Zyz-hF-EXa" firstAttribute="leading" secondItem="SKo-yZ-jXo" secondAttribute="trailing" constant="20" id="Hod-4o-PPI"/>
+                                                <constraint firstAttribute="trailing" secondItem="2BV-I5-HT5" secondAttribute="trailing" constant="15" id="ToJ-JL-y2G"/>
+                                                <constraint firstItem="SKo-yZ-jXo" firstAttribute="centerY" secondItem="7L7-02-7wt" secondAttribute="centerY" id="nau-sv-SPR"/>
+                                                <constraint firstAttribute="trailing" secondItem="Zyz-hF-EXa" secondAttribute="trailing" constant="15" id="vng-ee-Ipa"/>
+                                                <constraint firstItem="2BV-I5-HT5" firstAttribute="leading" secondItem="SKo-yZ-jXo" secondAttribute="trailing" constant="20" id="wsT-Yw-Ppl"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="linkLabel" destination="2BV-I5-HT5" id="VFz-uy-0UP"/>
+                                            <outlet property="nameLabel" destination="Zyz-hF-EXa" id="vhT-Oe-ULK"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="NCP-fe-L7Y" firstAttribute="width" secondItem="iWI-CT-3LO" secondAttribute="width" id="0XR-2c-Owj"/>
+                            <constraint firstItem="NCP-fe-L7Y" firstAttribute="leading" secondItem="dIC-bo-UKj" secondAttribute="leading" id="3Gb-ej-Yzn"/>
+                            <constraint firstItem="NCP-fe-L7Y" firstAttribute="height" secondItem="iWI-CT-3LO" secondAttribute="height" id="T1p-tO-FbB"/>
+                            <constraint firstItem="dIC-bo-UKj" firstAttribute="trailing" secondItem="NCP-fe-L7Y" secondAttribute="trailing" id="aD5-wC-JdI"/>
+                            <constraint firstItem="NCP-fe-L7Y" firstAttribute="top" secondItem="iWI-CT-3LO" secondAttribute="top" id="id9-Si-aee"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="dIC-bo-UKj"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="icon_listview-deselected" id="Pxc-DL-Cnx"/>
+                    <connections>
+                        <outlet property="studentsTableView" destination="NCP-fe-L7Y" id="fiI-2c-WlA"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LAy-zm-DVo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -152,6 +213,7 @@
     <resources>
         <image name="icon_listview-deselected" width="75" height="50"/>
         <image name="icon_mapview-deselected" width="75" height="50"/>
+        <image name="icon_pin" width="24" height="24"/>
         <image name="logo-u" width="62" height="62"/>
     </resources>
 </document>

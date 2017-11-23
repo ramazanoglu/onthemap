@@ -15,11 +15,10 @@ class MapViewController: UIViewController {
         
         ParseClient.sharedInstance().getStudentLocations(completionHandler: { result, error in
             
-            print(result)
             
         })
         
-        // Do any additional setup after loading the view.
+//         Do any additional setup after loading the view.
     }
     
     override func didReceiveMemoryWarning() {
