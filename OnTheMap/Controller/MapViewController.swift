@@ -26,6 +26,11 @@ class MapViewController: BaseViewController, MKMapViewDelegate {
             if data.count > 0 {
                 
                 for studentInformation in data {
+                    
+                    guard studentInformation.latitude != nil && studentInformation.longitude != nil else {
+                        continue
+                    }
+                    
                     let annotation = MKPointAnnotation()
                     annotation.coordinate = CLLocationCoordinate2D(latitude: studentInformation.latitude!, longitude: studentInformation.longitude!)
                     

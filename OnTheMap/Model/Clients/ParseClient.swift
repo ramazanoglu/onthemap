@@ -12,12 +12,14 @@ class ParseClient : NSObject {
     
     func getStudentLocations(completionHandler: @escaping(_ result: [StudentInformation]?, _ error: String?) -> Void) {
         
+        print("getStudentLocations")
+        
         func sendError(_ error: String) {
             print(error)
             completionHandler(nil, error)
         }
         
-        let queryItems : [String : AnyObject] = ["limit" : "20" as AnyObject,
+        let queryItems : [String : AnyObject] = ["limit" : "100" as AnyObject,
                                                  "order" : "-updatedAt" as AnyObject]
         
         let url = createURLComponents(path: "/parse/classes/StudentLocation", queryItems: queryItems)
@@ -59,14 +61,10 @@ class ParseClient : NSObject {
                 
                 let studentInformation = StudentInformation.init(dictionary : result)
                 
-                print("\(studentInformation)")
-                
                 studentsArray.append(studentInformation)
                 
             }
             
-            print("*************************************")
-            print(parsedResult)
             
             completionHandler(studentsArray, nil)
         }
