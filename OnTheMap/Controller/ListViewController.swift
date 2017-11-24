@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ListViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var studentsTableView: UITableView!
 
@@ -54,25 +54,22 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         studentsTableView.delegate = self
         studentsTableView.dataSource = self
         
-        ParseClient.sharedInstance().getStudentLocations(completionHandler: { result, error in
-            
-            guard  error == nil else {
-                
-                return
-            }
-            
-            self.studentsInformations = result!
-            
+        NotificationCenter.default.addObserver(self, selector: #selector(getDataUpdate), name: NSNotification.Name(rawValue: StudentInformations.sharedInstance.dataModelDidUpdateNotification), object: nil)
+    }
+    
+    @objc private func getDataUpdate() {
+        if let data = StudentInformations.sharedInstance.data {
+            self.studentsInformations = data
             
             performUIUpdatesOnMain {
                 self.studentsTableView.reloadData()
-
+                
             }
             
-        })
+        }
         
-        // Do any additional setup after loading the view.
     }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class MapViewController: UIViewController, MKMapViewDelegate {
+class MapViewController: BaseViewController, MKMapViewDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
     
@@ -18,20 +18,14 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         
         mapView.delegate = self
         
-        ParseClient.sharedInstance().getStudentLocations(completionHandler: { result, error in
-            
-            guard error == nil else {
-                return
-            }
-            
-            guard let result = result else {
-                return
-            }
-            
-            
-            if result.count > 0 {
+        NotificationCenter.default.addObserver(self, selector: #selector(getDataUpdate), name: NSNotification.Name(rawValue: StudentInformations.sharedInstance.dataModelDidUpdateNotification), object: nil)
+    }
+    
+    @objc private func getDataUpdate() {
+        if let data = StudentInformations.sharedInstance.data {
+            if data.count > 0 {
                 
-                for studentInformation in result {
+                for studentInformation in data {
                     let annotation = MKPointAnnotation()
                     annotation.coordinate = CLLocationCoordinate2D(latitude: studentInformation.latitude!, longitude: studentInformation.longitude!)
                     
@@ -39,16 +33,11 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                     annotation.subtitle = studentInformation.mediaUrl
                     
                     self.mapView.addAnnotation(annotation)
-                   
+                    
                 }
                 
             }
-            
-        })
-        
-
-        
-//         Do any additional setup after loading the view.
+        }
     }
     
     override func didReceiveMemoryWarning() {

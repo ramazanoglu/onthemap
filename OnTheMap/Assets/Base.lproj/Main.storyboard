@@ -107,7 +107,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="NCP-fe-L7Y">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="90" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="StudentsTableViewCell" rowHeight="60" id="tx5-kk-qtM" customClass="StudentsTableViewCell" customModule="OnTheMap" customModuleProvider="target">
@@ -155,14 +155,25 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a0e-w2-ZsR" customClass="HeaderView" customModule="OnTheMap" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="90"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="90" id="gjK-s8-eoL"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="NCP-fe-L7Y" firstAttribute="width" secondItem="iWI-CT-3LO" secondAttribute="width" id="0XR-2c-Owj"/>
                             <constraint firstItem="NCP-fe-L7Y" firstAttribute="leading" secondItem="dIC-bo-UKj" secondAttribute="leading" id="3Gb-ej-Yzn"/>
+                            <constraint firstItem="a0e-w2-ZsR" firstAttribute="leading" secondItem="dIC-bo-UKj" secondAttribute="leading" id="8Hn-PN-qdw"/>
+                            <constraint firstItem="a0e-w2-ZsR" firstAttribute="top" secondItem="iWI-CT-3LO" secondAttribute="top" id="Q2k-fQ-hRS"/>
                             <constraint firstItem="NCP-fe-L7Y" firstAttribute="height" secondItem="iWI-CT-3LO" secondAttribute="height" id="T1p-tO-FbB"/>
                             <constraint firstItem="dIC-bo-UKj" firstAttribute="trailing" secondItem="NCP-fe-L7Y" secondAttribute="trailing" id="aD5-wC-JdI"/>
-                            <constraint firstItem="NCP-fe-L7Y" firstAttribute="top" secondItem="iWI-CT-3LO" secondAttribute="top" id="id9-Si-aee"/>
+                            <constraint firstItem="NCP-fe-L7Y" firstAttribute="top" secondItem="iWI-CT-3LO" secondAttribute="top" constant="90" id="id9-Si-aee"/>
+                            <constraint firstItem="dIC-bo-UKj" firstAttribute="trailing" secondItem="a0e-w2-ZsR" secondAttribute="trailing" id="kqr-EI-UUN"/>
+                            <constraint firstItem="a0e-w2-ZsR" firstAttribute="width" secondItem="iWI-CT-3LO" secondAttribute="width" id="s3T-wb-dMd"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="dIC-bo-UKj"/>
                     </view>
@@ -184,16 +195,26 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="AZ4-ZN-HVx">
-                                <rect key="frame" x="0.0" y="-14.5" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="90" width="375" height="667"/>
                             </mapView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ij0-lp-AsP" customClass="HeaderView" customModule="OnTheMap" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="90"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="90" id="JFS-Zt-WRf"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="AZ4-ZN-HVx" firstAttribute="width" secondItem="f3N-N2-ZEH" secondAttribute="width" id="5LF-qa-FFZ"/>
-                            <constraint firstItem="AZ4-ZN-HVx" firstAttribute="height" secondItem="f3N-N2-ZEH" secondAttribute="height" id="6Kh-s7-d5r"/>
-                            <constraint firstItem="AZ4-ZN-HVx" firstAttribute="centerY" secondItem="eQd-MG-6hP" secondAttribute="centerY" id="9Ik-uq-9v2"/>
+                            <constraint firstItem="ij0-lp-AsP" firstAttribute="top" secondItem="f3N-N2-ZEH" secondAttribute="top" id="9Eh-hn-h7R"/>
+                            <constraint firstItem="eQd-MG-6hP" firstAttribute="trailing" secondItem="ij0-lp-AsP" secondAttribute="trailing" id="Cga-Vw-xGv"/>
                             <constraint firstItem="AZ4-ZN-HVx" firstAttribute="leading" secondItem="eQd-MG-6hP" secondAttribute="leading" id="Oa0-WX-rJq"/>
                             <constraint firstItem="AZ4-ZN-HVx" firstAttribute="height" secondItem="f3N-N2-ZEH" secondAttribute="height" id="PgO-KE-nuw"/>
+                            <constraint firstItem="ij0-lp-AsP" firstAttribute="leading" secondItem="eQd-MG-6hP" secondAttribute="leading" id="Rr1-Gu-pAV"/>
+                            <constraint firstItem="AZ4-ZN-HVx" firstAttribute="top" secondItem="f3N-N2-ZEH" secondAttribute="top" constant="90" id="aOj-I1-bjD"/>
+                            <constraint firstItem="ij0-lp-AsP" firstAttribute="width" secondItem="f3N-N2-ZEH" secondAttribute="width" id="qg4-JW-ThE"/>
                             <constraint firstItem="eQd-MG-6hP" firstAttribute="trailing" secondItem="AZ4-ZN-HVx" secondAttribute="trailing" id="uIR-x1-DNM"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="eQd-MG-6hP"/>
