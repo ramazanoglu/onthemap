@@ -51,11 +51,8 @@ class LoginViewController: UIViewController {
         UdacityClient.sharedInstance().postSession(username: emailTextField!.text!, password: passwordTextField!.text!, completionHandler: {(result, error) in
              performUIUpdatesOnMain {
                 if error == nil {
-                    print(result)
-                
                     self.performSegue(withIdentifier: "openTabBarSegue", sender: nil)
 
-                
                 } else {
               
                     self.displayError(error)

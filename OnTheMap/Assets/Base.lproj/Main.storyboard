@@ -72,13 +72,9 @@
                             <constraint firstItem="Z9O-75-ozN" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="40" id="DH9-Ji-cMf"/>
                             <constraint firstItem="L84-JD-nhT" firstAttribute="top" secondItem="iVE-8I-e8c" secondAttribute="bottom" constant="80" id="Dp5-qL-8wM"/>
                             <constraint firstItem="RGX-VW-xiY" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="J3D-bV-lDK"/>
-                            <constraint firstItem="Ndc-h1-9b3" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="M7I-Dt-rtU"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Z4O-ZR-c6d" secondAttribute="trailing" constant="40" id="RKz-9d-Xoe"/>
                             <constraint firstItem="L84-JD-nhT" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="40" id="RxS-VZ-7S5"/>
-                            <constraint firstItem="Z9O-75-ozN" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="UnC-lo-zJc"/>
-                            <constraint firstItem="FmP-ns-fPC" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="YGK-nH-lvD"/>
                             <constraint firstItem="Ndc-h1-9b3" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="40" id="ZhS-BQ-TSt"/>
-                            <constraint firstItem="L84-JD-nhT" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="Zwe-4G-Wzn"/>
                             <constraint firstItem="Z4O-ZR-c6d" firstAttribute="top" secondItem="L84-JD-nhT" secondAttribute="bottom" constant="40" id="abo-An-kgJ"/>
                             <constraint firstItem="RGX-VW-xiY" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="b8A-tF-wUq"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="L84-JD-nhT" secondAttribute="trailing" constant="40" id="enI-CA-t9v"/>
@@ -88,7 +84,6 @@
                             <constraint firstItem="iVE-8I-e8c" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="40" id="uwT-Sf-gqc"/>
                             <constraint firstItem="iVE-8I-e8c" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="xe8-A7-ChG"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="FmP-ns-fPC" secondAttribute="trailing" constant="40" id="xkX-Xl-VXb"/>
-                            <constraint firstItem="Z4O-ZR-c6d" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="zHV-su-XFg"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>

@@ -19,7 +19,7 @@ class MapViewController: BaseViewController, MKMapViewDelegate {
         mapView.delegate = self
         
         NotificationCenter.default.addObserver(self, selector: #selector(getDataUpdate), name: NSNotification.Name(rawValue: StudentInformations.sharedInstance.dataModelDidUpdateNotification), object: nil)
-
+        
     }
     
     @objc private func getDataUpdate() {
@@ -42,24 +42,27 @@ class MapViewController: BaseViewController, MKMapViewDelegate {
                     
                 }
                 
+              
+                    
+                let location = CLLocation(latitude: data[0].latitude!, longitude: data[0].longitude!)
+                    
+                    performUIUpdatesOnMain {
+                        self.centerMapOnLocation(location: location)
+
+                    }
+                
             }
         }
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
-  
-    
-    let regionRadius: CLLocationDistance = 1000
+    let regionRadius: CLLocationDistance = 1000000
     func centerMapOnLocation(location: CLLocation) {
         let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate,
                                                                   regionRadius, regionRadius)
         mapView.setRegion(coordinateRegion, animated: true)
     }
-
+    
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         if annotation is MKUserLocation { return nil }
         
