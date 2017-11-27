@@ -9,15 +9,17 @@
 import UIKit
 
 class HeaderView: UIView {
-
+    
+    let notificationId = "headerViewAddPinNotification"
+    
     @IBOutlet var contentView: UIView!
     /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
+     // Only override draw() if you perform custom drawing.
+     // An empty implementation adversely affects performance during animation.
+     override func draw(_ rect: CGRect) {
+     // Drawing code
+     }
+     */
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -40,7 +42,7 @@ class HeaderView: UIView {
         contentView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         
     }
-
+    
     @IBAction func logout(_ sender: Any) {
         print("logout")
     }
@@ -54,5 +56,8 @@ class HeaderView: UIView {
     
     @IBAction func addPin(_ sender: Any) {
         print("addPin")
+        
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: notificationId), object: nil)
+        
     }
 }

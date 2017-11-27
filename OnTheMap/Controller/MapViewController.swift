@@ -19,6 +19,7 @@ class MapViewController: BaseViewController, MKMapViewDelegate {
         mapView.delegate = self
         
         NotificationCenter.default.addObserver(self, selector: #selector(getDataUpdate), name: NSNotification.Name(rawValue: StudentInformations.sharedInstance.dataModelDidUpdateNotification), object: nil)
+
     }
     
     @objc private func getDataUpdate() {
@@ -49,6 +50,8 @@ class MapViewController: BaseViewController, MKMapViewDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+  
     
     let regionRadius: CLLocationDistance = 1000
     func centerMapOnLocation(location: CLLocation) {

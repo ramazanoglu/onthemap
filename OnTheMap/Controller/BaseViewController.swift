@@ -15,6 +15,9 @@ class BaseViewController: UIViewController {
         
         StudentInformations.sharedInstance.requestData()
 
+        NotificationCenter.default.addObserver(self, selector: #selector(openAddLocation), name: NSNotification.Name(rawValue: "headerViewAddPinNotification"), object: nil)
+
+        
         // Do any additional setup after loading the view.
     }
 
@@ -23,4 +26,9 @@ class BaseViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
   
+    @objc private func openAddLocation() {
+        
+        performSegue(withIdentifier: "addLocationSegue", sender: self)
+        
+    }
 }

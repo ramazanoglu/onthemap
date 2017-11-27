@@ -13,11 +13,14 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var errorTextView: UITextView!
+    @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        activityIndicatorView.alpha = 0
     }
     
     override func didReceiveMemoryWarning() {
@@ -41,6 +44,10 @@ class LoginViewController: UIViewController {
             return
         }
         
+        activityIndicatorView.startAnimating()
+        activityIndicatorView.alpha = 1
+
+        
         UdacityClient.sharedInstance().postSession(username: emailTextField!.text!, password: passwordTextField!.text!, completionHandler: {(result, error) in
              performUIUpdatesOnMain {
                 if error == nil {
@@ -53,6 +60,10 @@ class LoginViewController: UIViewController {
               
                     self.displayError(error)
                 }
+                
+                self.activityIndicatorView.stopAnimating()
+                self.activityIndicatorView.alpha = 0
+
             }
         })
         

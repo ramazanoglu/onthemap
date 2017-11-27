@@ -44,9 +44,7 @@ class ListViewController: BaseViewController, UITableViewDelegate, UITableViewDa
         }
 
 
-    }
-
-    
+    }    
     
     override func viewDidLoad() {
         super.viewDidLoad()

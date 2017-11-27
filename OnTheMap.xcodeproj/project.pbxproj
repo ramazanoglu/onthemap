@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		221B22251FC833BD001E93C5 /* StudentInformations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221B22241FC833BD001E93C5 /* StudentInformations.swift */; };
+		2262FA5D1FCC16F7008857BC /* AddLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2262FA5C1FCC16F7008857BC /* AddLocationViewController.swift */; };
 		226E0FB51FC57569008B7BCB /* UdacityClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226E0FB41FC57569008B7BCB /* UdacityClient.swift */; };
 		226E0FB71FC58B7F008B7BCB /* GCDBlackBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226E0FB61FC58B7F008B7BCB /* GCDBlackBox.swift */; };
 		2271E4C61FC483940051048D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2271E4C51FC483940051048D /* AppDelegate.swift */; };
@@ -46,6 +47,7 @@
 
 /* Begin PBXFileReference section */
 		221B22241FC833BD001E93C5 /* StudentInformations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentInformations.swift; sourceTree = "<group>"; };
+		2262FA5C1FCC16F7008857BC /* AddLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLocationViewController.swift; sourceTree = "<group>"; };
 		226E0FB41FC57569008B7BCB /* UdacityClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UdacityClient.swift; sourceTree = "<group>"; };
 		226E0FB61FC58B7F008B7BCB /* GCDBlackBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GCDBlackBox.swift; path = "../../Downloads/ios-nd-networking-master 2/TheMovieManager-v2/TheMovieManager/GCDBlackBox.swift"; sourceTree = "<group>"; };
 		2271E4C21FC483940051048D /* OnTheMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnTheMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -184,6 +186,7 @@
 				227862D71FC5B89D001A5A36 /* MapViewController.swift */,
 				227862D91FC5B8AC001A5A36 /* ListViewController.swift */,
 				22C567D11FC7314700134F2B /* BaseViewController.swift */,
+				2262FA5C1FCC16F7008857BC /* AddLocationViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -338,6 +341,7 @@
 				226E0FB71FC58B7F008B7BCB /* GCDBlackBox.swift in Sources */,
 				227862D81FC5B89D001A5A36 /* MapViewController.swift in Sources */,
 				227862D61FC5B808001A5A36 /* ParseClient.swift in Sources */,
+				2262FA5D1FCC16F7008857BC /* AddLocationViewController.swift in Sources */,
 				2271E4C81FC483940051048D /* LoginViewController.swift in Sources */,
 				22C567D21FC7314700134F2B /* BaseViewController.swift in Sources */,
 				22C567D01FC6D36400134F2B /* StudentsTableViewCell.swift in Sources */,
