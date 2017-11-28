@@ -42,8 +42,6 @@ class MapViewController: BaseViewController, MKMapViewDelegate {
                     
                 }
                 
-              
-                    
                 let location = CLLocation(latitude: data[0].latitude!, longitude: data[0].longitude!)
                     
                     performUIUpdatesOnMain {

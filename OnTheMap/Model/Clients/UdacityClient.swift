@@ -10,6 +10,9 @@ import Foundation
 
 class UdacityClient : NSObject {
     
+    var uniqueKey: String!
+    
+    var udacityAccount: UdacityAccount!
     
     func postSession(username: String, password: String, completionHandler: @escaping(_ result: String?, _ error: String?) -> Void) {
         
@@ -23,6 +26,9 @@ class UdacityClient : NSObject {
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpBody = "{\"udacity\": {\"username\": \"\(username)\", \"password\": \"\(password)\"}}".data(using: .utf8)
+        
+        print(String(data: request.httpBody!, encoding: .utf8)!)
+        
         let session = URLSession.shared
         let task = session.dataTask(with: request) { data, response, error in
            
@@ -62,20 +68,121 @@ class UdacityClient : NSObject {
             }
             
             guard var session = parsedResult["session"] as! [String:AnyObject]! else {
-                sendError("Cannot login session")
+                sendError("Cannot login, session")
                 return
             }
             
             guard let sessionId = session["id"] as! String! else {
-                sendError("Cannot login sessionID")
+                sendError("Cannot login, sessionID")
                 return
             }
+            
+            guard var account = parsedResult["account"] as! [String:AnyObject]! else {
+                sendError("Cannot login, account")
+                return
+            }
+            
+            guard let key = account["key"] as! String! else {
+                sendError("Account Error")
+                return
+            }
+            
+            print(key)
+            
+            self.getUdacityUser(userId: key)
+            
+            self.uniqueKey = key
             
             completionHandler(sessionId, nil)
             
         }
         task.resume()
         
+    }
+    
+    func deleteSession(completionHandler: @escaping(_ result: String?, _ error: String?) -> Void) {
+        
+        var request = URLRequest(url: URL(string: "https://www.udacity.com/api/session")!)
+        request.httpMethod = "DELETE"
+        var xsrfCookie: HTTPCookie? = nil
+        let sharedCookieStorage = HTTPCookieStorage.shared
+        for cookie in sharedCookieStorage.cookies! {
+            if cookie.name == "XSRF-TOKEN" { xsrfCookie = cookie }
+        }
+        if let xsrfCookie = xsrfCookie {
+            request.setValue(xsrfCookie.value, forHTTPHeaderField: "X-XSRF-TOKEN")
+        }
+        let session = URLSession.shared
+        let task = session.dataTask(with: request) { data, response, error in
+            if error != nil { // Handle error…
+                
+                print(error?.localizedDescription)
+
+                
+                completionHandler(nil, "Logout failed")
+                
+                return
+            }
+            let range = Range(5..<data!.count)
+            let newData = data?.subdata(in: range) /* subset response data! */
+            print(String(data: newData!, encoding: .utf8)!)
+            
+            completionHandler("Logout", nil)
+
+        }
+        task.resume()
+
+    }
+    
+    func getUdacityUser(userId: String) {
+        
+        let request = URLRequest(url: URL(string: "https://www.udacity.com/api/users/" + userId)!)
+        let session = URLSession.shared
+        let task = session.dataTask(with: request) { data, response, error in
+            if error != nil { // Handle error...
+                return
+            }
+           
+            let parsedResult = self.extractJSON(data: data!)
+            
+            guard parsedResult != nil else {
+                print("parsedResult nil")
+                return
+            }
+            
+            guard let user = parsedResult!["user"] as! [String:AnyObject]! else {
+                
+                print("parse error")
+                return
+            }
+            
+            let firstName = user["first_name"] as! String
+            let lastName = user["last_name"] as! String
+            let key = user["key"] as! String
+            
+            let udacityAccount = UdacityAccount(key: key, firstName: firstName, lastName: lastName)
+            
+            self.udacityAccount = udacityAccount
+            
+            print("\(self.udacityAccount)")
+            
+        }
+        task.resume()
+        
+    }
+    
+    func extractJSON(data: Data) -> [String:AnyObject]? {
+        var parsedResult: [String:AnyObject]!
+        
+        do {
+            parsedResult = try JSONSerialization.jsonObject(with: self.clearUdacityResponse(data: data), options: .allowFragments) as! [String:AnyObject]
+            
+        } catch {
+           
+            return nil
+        }
+        
+        return parsedResult
     }
     
     func prepareUdacityRequest(url: String) -> URLRequest {

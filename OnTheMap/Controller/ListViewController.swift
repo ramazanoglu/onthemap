@@ -11,7 +11,7 @@ import UIKit
 class ListViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var studentsTableView: UITableView!
-
+    
     
     var studentsInformations = [StudentInformation]()
     
@@ -25,11 +25,14 @@ class ListViewController: BaseViewController, UITableViewDelegate, UITableViewDa
         let cell:StudentsTableViewCell = self.studentsTableView.dequeueReusableCell(withIdentifier: "StudentsTableViewCell") as! StudentsTableViewCell!
         
         // set the text from the data model
-        cell.nameLabel.text = self.studentsInformations[indexPath.row].firstName! + " " +  self.studentsInformations[indexPath.row].lastName!
-        cell.linkLabel.text = self.studentsInformations[indexPath.row].mediaUrl
         
+            let firstName = self.studentsInformations[indexPath.row].firstName ?? ""
+            let lastName = self.studentsInformations[indexPath.row].lastName ?? ""
+        
+            cell.nameLabel.text = firstName + " " + lastName
+            cell.linkLabel.text = self.studentsInformations[indexPath.row].mediaUrl ?? ""
         return cell
-
+        
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -42,13 +45,13 @@ class ListViewController: BaseViewController, UITableViewDelegate, UITableViewDa
         if let url = URL(string: studentsInformations[indexPath.row].mediaUrl!) {
             UIApplication.shared.open(url, options: [:])
         }
-
-
+        
+        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         studentsTableView.delegate = self
         studentsTableView.dataSource = self
         

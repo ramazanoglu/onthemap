@@ -17,39 +17,51 @@ class AddLocationViewController: UIViewController {
 
     @IBOutlet weak var errorLabel: UILabel!
     
+    @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
+    @IBOutlet weak var findLocationButton: UIButton!
     
+    var location: CLLocation!
+    var websiteLink: String!
+    var address: String!
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "addLocationMapSegue" {
+            if let toViewController = segue.destination as? AddLocationMapViewController {
+                toViewController.location = self.location
+                toViewController.websiteUrl = self.websiteLink
+                toViewController.address = self.address
+            }
+        }
+    }
     
     override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        // Do any additional setup after loading the view.
+        updateActivityIndicatorView(isActive: false)
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    
     
     
     @IBAction func findLocationClicked(_ sender: Any) {
+        
+        updateActivityIndicatorView(isActive: true)
+        
         
         errorLabel.text = ""
         
         guard locationTextField.text != "" else {
             
             errorLabel.text = "Location cannot be empty"
+            updateActivityIndicatorView(isActive: false)
+
             
             return
         }
  
         guard linkTextField.text != "" else {
             
-            errorLabel.text = "Website canoot be empty"
+            errorLabel.text = "Website cannot be empty"
+            updateActivityIndicatorView(isActive: false)
+
             
             return
-            
         }
         
         let address = locationTextField.text
@@ -61,19 +73,52 @@ class AddLocationViewController: UIViewController {
                 let location = placemarks.first?.location
                 
                 else {
-                    // handle no location found
-                    self.errorLabel.text = "Invalid address"
+                    self.errorLabel.text = "Address couldn't be converted"
+                    self.updateActivityIndicatorView(isActive: false)
+
                     return
             }
             
-            print("Location \(location)")
-
+            self.address = address
+            self.location = location
+            self.websiteLink = self.linkTextField.text!
+            
             self.performSegue(withIdentifier: "addLocationMapSegue", sender: self)
-        
+            
+            self.updateActivityIndicatorView(isActive: false)
+
         }
     }
     
     @IBAction func cancelClicked(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
+    
+    func updateActivityIndicatorView(isActive:Bool) {
+        
+        performUIUpdatesOnMain {
+            
+        
+        if isActive {
+            self.activityIndicatorView.startAnimating()
+            self.activityIndicatorView.alpha = 1
+            
+            self.locationTextField.isEnabled = false
+            self.linkTextField.isEnabled = false
+            self.findLocationButton.isEnabled = false
+
+
+        } else {
+            self.activityIndicatorView.stopAnimating()
+            self.activityIndicatorView.alpha = 0
+            
+            self.locationTextField.isEnabled = true
+            self.linkTextField.isEnabled = true
+            self.findLocationButton.isEnabled = true
+
+        }
+        
+        }
+    }
+    
 }

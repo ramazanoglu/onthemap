@@ -16,6 +16,7 @@ class BaseViewController: UIViewController {
         StudentInformations.sharedInstance.requestData()
 
         NotificationCenter.default.addObserver(self, selector: #selector(openAddLocation), name: NSNotification.Name(rawValue: "headerViewAddPinNotification"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(logout), name: NSNotification.Name(rawValue: "headerViewLogoutNotification"), object: nil)
 
         
         // Do any additional setup after loading the view.
@@ -29,6 +30,19 @@ class BaseViewController: UIViewController {
     @objc private func openAddLocation() {
         
         performSegue(withIdentifier: "addLocationSegue", sender: self)
+        
+    }
+    
+    @objc private func logout() {
+        
+        print("logout base")
+        
+        performUIUpdatesOnMain {
+            self.view.window!.rootViewController?.dismiss(animated: false, completion: nil)
+
+            return
+        }
+        
         
     }
 }

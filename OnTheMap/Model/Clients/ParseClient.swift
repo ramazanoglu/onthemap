@@ -10,6 +10,8 @@ import Foundation
 
 class ParseClient : NSObject {
     
+    var loggedInStudentInformation : StudentInformation!
+    
     func getStudentLocations(completionHandler: @escaping(_ result: [StudentInformation]?, _ error: String?) -> Void) {
         
         print("getStudentLocations")
@@ -25,9 +27,152 @@ class ParseClient : NSObject {
         let url = createURLComponents(path: "/parse/classes/StudentLocation", queryItems: queryItems)
         
         let request = createURLRequest(url: url)
+        
+        runRequest(request: request, completionHandler: ({parsedResult, error in
+            
+            if error != nil {
+                
+                completionHandler(nil, error)
+                
+            } else {
+                
+                let results = parsedResult!["results"] as! [[String:AnyObject]]
+                
+                var studentsArray = [StudentInformation]()
+                
+                for result in results {
+                    
+                    let studentInformation = StudentInformation.init(dictionary : result)
+                    
+                    studentsArray.append(studentInformation)
+                    
+                }
+                
+                completionHandler(studentsArray, nil)
+            }
+            
+        }))
+        
+    }
+    
+    func getStudentLocation(uniqueKey: String, completionHandler: @escaping(_ result: StudentInformation?, _ error: String?) -> Void) {
+        
+        var components = URLComponents()
+        components.scheme = "https"
+        components.host = "parse.udacity.com"
+        components.path = "/parse/classes/StudentLocation"
+        components.queryItems = [URLQueryItem]()
+        
+        let queryItem1 = URLQueryItem(name: "where", value: "{\"uniqueKey\":\"\(uniqueKey)\"}")
+        
+        components.queryItems!.append(queryItem1)
+        
+        var request = URLRequest(url: components.url!)
+        request.addValue("QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr", forHTTPHeaderField: "X-Parse-Application-Id")
+        request.addValue("QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY", forHTTPHeaderField: "X-Parse-REST-API-Key")
+        
+        
+        runRequest(request: request, completionHandler: ({parsedResults, error in
+            
+            if error != nil {
+                
+                completionHandler(nil, error)
+                
+            } else {
+                
+                let results = parsedResults!["results"] as! [[String:AnyObject]]
+                
+                var studentsArray = [StudentInformation]()
+                
+                for result in results {
+                    
+                    let studentInformation = StudentInformation.init(dictionary : result)
+                    
+                    studentsArray.append(studentInformation)
+                    
+                }
+                
+                if studentsArray.count > 0 {
+                    completionHandler(studentsArray[0], nil)
+                } else {
+                    completionHandler(nil, nil)
+                }
+                
+            }
+        }))
+        
+    }
+    
+    func createStudentLocation(mapString: String, mediaURL : String, latitude:String, longitude: String, completionHandler: @escaping(_ result: Bool?, _ error: String?) -> Void){
+        
+        var request: URLRequest!
+        
+        if loggedInStudentInformation != nil {
+            print("put \(loggedInStudentInformation)")
+            
+            let urlString = "https://parse.udacity.com/parse/classes/StudentLocation/" + loggedInStudentInformation.objectID!
+            
+            let url = URL(string: urlString)
+            request = createURLRequest(url: url!)
+            request.httpMethod = "PUT"
+            
+        } else {
+            print("post")
+            
+            request = createURLRequest(url: URL(string: "https://parse.udacity.com/parse/classes/StudentLocation")!)
+            request.httpMethod = "POST"
+        }
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+
+        let uniqueKey = UdacityClient.sharedInstance().udacityAccount.key
+        let firstName = UdacityClient.sharedInstance().udacityAccount.firstName
+        let lastName = UdacityClient.sharedInstance().udacityAccount.lastName
+        
+        request.httpBody = "{\"uniqueKey\": \"\(uniqueKey)\", \"firstName\": \"\(firstName)\", \"lastName\": \"\(lastName)\",\"mapString\": \"\(mapString)\", \"mediaURL\": \"\(mediaURL)\",\"latitude\": \(latitude), \"longitude\": \(longitude)}".data(using: .utf8)
+        
+        runRequest(request: request, completionHandler: ({parsedResult, error in
+            
+            if error != nil {
+                completionHandler(nil, error)
+                return
+            }
+            
+            print(parsedResult)
+            
+            if self.loggedInStudentInformation != nil {
+                
+                guard parsedResult!["updatedAt"] != nil else {
+                    completionHandler(nil, "Location cannot be updated")
+                    return
+                }
+                
+                completionHandler(true, nil)
+
+                
+            } else {
+                guard parsedResult!["createdAt"] != nil else {
+                    completionHandler(nil, "Location cannot be created")
+                    return
+                }
+                
+                completionHandler(true, nil)
+            }
+                        
+        }))
+        
+        
+    }
+  
+    
+    func runRequest(request: URLRequest, completionHandler: @escaping(_ result: [String:AnyObject]?, _ error: String?) -> Void) {
+        
+        func sendError(_ error: String) {
+            print(error)
+            completionHandler(nil, error)
+        }
+        
         let session = URLSession.shared
         let task = session.dataTask(with: request) { data, response, error in
-            
             if error != nil {
                 sendError("There was an error with your request: \(error!)")
                 return
@@ -49,55 +194,17 @@ class ParseClient : NSObject {
                 parsedResult = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String:AnyObject]
                 
             } catch {
-                sendError("There is a problem with connection")
+                sendError("Cannot get data from server")
                 return
             }
             
-            let results = parsedResult["results"] as! [[String:AnyObject]]
-            
-            var studentsArray = [StudentInformation]()
-            
-            for result in results {
-                
-                let studentInformation = StudentInformation.init(dictionary : result)
-                
-                studentsArray.append(studentInformation)
-                
-            }
+            completionHandler(parsedResult, nil)
             
             
-            completionHandler(studentsArray, nil)
         }
         task.resume()
         
     }
-    
-    func getStudentLocation(uniqueKey: String, completionHandler: @escaping(_ result: String?, _ error: String?) -> Void) {
-        
-        var components = URLComponents()
-        components.scheme = "https"
-        components.host = "parse.udacity.com"
-        components.path = "/parse/classes/StudentLocation"
-        components.queryItems = [URLQueryItem]()
-        
-        let queryItem1 = URLQueryItem(name: "where", value: "{\"uniqueKey\":\"\(uniqueKey)\"}")
-        
-        components.queryItems!.append(queryItem1)
-        
-        var request = URLRequest(url: components.url!)
-        request.addValue("QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr", forHTTPHeaderField: "X-Parse-Application-Id")
-        request.addValue("QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY", forHTTPHeaderField: "X-Parse-REST-API-Key")
-        let session = URLSession.shared
-        let task = session.dataTask(with: request) { data, response, error in
-            if error != nil { // Handle error
-                return
-            }
-            print(String(data: data!, encoding: .utf8)!)
-        }
-        task.resume()
-        
-    }
-    
     
     func createURLRequest(url :URL) -> URLRequest {
         var request = URLRequest(url: url)

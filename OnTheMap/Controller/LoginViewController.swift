@@ -52,6 +52,7 @@ class LoginViewController: UIViewController {
              performUIUpdatesOnMain {
                 if error == nil {
                     self.performSegue(withIdentifier: "openTabBarSegue", sender: nil)
+                 
 
                 } else {
               
@@ -73,7 +74,11 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func signUpClicked(_ sender: UIButton) {
-        print("signup clicked")
+        
+        if let url = URL(string: "https://www.udacity.com/account/auth#!/signup") {
+            UIApplication.shared.open(url, options: [:])
+        }
+
     }
 }
 
