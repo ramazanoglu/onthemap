@@ -21,10 +21,8 @@ class UdacityClient : NSObject {
             completionHandler(nil, error)
         }
         
-        var request = URLRequest(url: URL(string: "https://www.udacity.com/api/session")!)
+        var request = prepareUdacityRequest(url: "https://www.udacity.com/api/session")
         request.httpMethod = "POST"
-        request.addValue("application/json", forHTTPHeaderField: "Accept")
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpBody = "{\"udacity\": {\"username\": \"\(username)\", \"password\": \"\(password)\"}}".data(using: .utf8)
         
         print(String(data: request.httpBody!, encoding: .utf8)!)
@@ -118,11 +116,15 @@ class UdacityClient : NSObject {
                 
                 print(error?.localizedDescription)
 
-                
                 completionHandler(nil, "Logout failed")
                 
                 return
             }
+             guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 200 && statusCode <= 299 else {
+                completionHandler(nil, "Logout failed")
+                return
+            }
+            
             let range = Range(5..<data!.count)
             let newData = data?.subdata(in: range) /* subset response data! */
             print(String(data: newData!, encoding: .utf8)!)
