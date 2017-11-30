@@ -12,6 +12,7 @@ class HeaderView: UIView {
     
     let notificationId = "headerViewAddPinNotification"
     let logoutNotificationId = "headerViewLogoutNotification"
+    let refreshNotificationId = "headerViewRefreshNotification"
 
     
     @IBOutlet var contentView: UIView!
@@ -59,7 +60,8 @@ class HeaderView: UIView {
     @IBAction func refresh(_ sender: Any) {
         print("refresh")
         
-        StudentInformations.sharedInstance.requestData()
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: self.refreshNotificationId), object: nil)
+        
     }
     
     

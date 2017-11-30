@@ -71,10 +71,10 @@
 		227862D71FC5B89D001A5A36 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		227862D91FC5B8AC001A5A36 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		227862DB1FC5D688001A5A36 /* StudentInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentInformation.swift; sourceTree = "<group>"; };
-		22C567CF1FC6D36400134F2B /* StudentsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StudentsTableViewCell.swift; path = OnTheMap/Controller/StudentsTableViewCell.swift; sourceTree = SOURCE_ROOT; };
+		22C567CF1FC6D36400134F2B /* StudentsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StudentsTableViewCell.swift; path = OnTheMap/View/StudentsTableViewCell.swift; sourceTree = SOURCE_ROOT; };
 		22C567D11FC7314700134F2B /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
-		22C567D31FC7374A00134F2B /* HeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = HeaderView.xib; path = OnTheMap/Controller/HeaderView.xib; sourceTree = SOURCE_ROOT; };
-		22C567D51FC737FB00134F2B /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HeaderView.swift; path = OnTheMap/Controller/HeaderView.swift; sourceTree = SOURCE_ROOT; };
+		22C567D31FC7374A00134F2B /* HeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = HeaderView.xib; path = OnTheMap/View/HeaderView.xib; sourceTree = SOURCE_ROOT; };
+		22C567D51FC737FB00134F2B /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HeaderView.swift; path = OnTheMap/View/HeaderView.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,9 +134,9 @@
 		2271E4C41FC483940051048D /* OnTheMap */ = {
 			isa = PBXGroup;
 			children = (
+				227CDBDC1FCFFCFF0037B3FF /* View */,
 				2271E4F61FC483D70051048D /* Assets */,
 				2271E4F51FC483C20051048D /* Controller */,
-				2271E4F41FC483BA0051048D /* View */,
 				2271E4F31FC483A90051048D /* Model */,
 				2271E4C51FC483940051048D /* AppDelegate.swift */,
 				22199E141FCEBB35002119E0 /* GCDBlackBox.swift */,
@@ -174,16 +174,6 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		2271E4F41FC483BA0051048D /* View */ = {
-			isa = PBXGroup;
-			children = (
-				22C567CF1FC6D36400134F2B /* StudentsTableViewCell.swift */,
-				22C567D31FC7374A00134F2B /* HeaderView.xib */,
-				22C567D51FC737FB00134F2B /* HeaderView.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
 		2271E4F51FC483C20051048D /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -205,6 +195,16 @@
 				2271E4CE1FC483940051048D /* LaunchScreen.storyboard */,
 			);
 			path = Assets;
+			sourceTree = "<group>";
+		};
+		227CDBDC1FCFFCFF0037B3FF /* View */ = {
+			isa = PBXGroup;
+			children = (
+				22C567CF1FC6D36400134F2B /* StudentsTableViewCell.swift */,
+				22C567D31FC7374A00134F2B /* HeaderView.xib */,
+				22C567D51FC737FB00134F2B /* HeaderView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

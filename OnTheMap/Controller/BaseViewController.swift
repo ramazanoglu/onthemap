@@ -9,40 +9,56 @@
 import UIKit
 
 class BaseViewController: UIViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        StudentInformations.sharedInstance.requestData()
-
+        refresh()
+        
         NotificationCenter.default.addObserver(self, selector: #selector(openAddLocation), name: NSNotification.Name(rawValue: "headerViewAddPinNotification"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(logout), name: NSNotification.Name(rawValue: "headerViewLogoutNotification"), object: nil)
-
+        NotificationCenter.default.addObserver(self, selector: #selector(refresh), name: NSNotification.Name(rawValue: "headerViewRefreshNotification"), object: nil)
+        
         
         // Do any additional setup after loading the view.
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-  
+    
     @objc private func openAddLocation() {
+        performUIUpdatesOnMain {
+            self.performSegue(withIdentifier: "addLocationSegue", sender: self)
+        }
+    }
+    
+    @objc private func refresh() {
         
-        performSegue(withIdentifier: "addLocationSegue", sender: self)
+        StudentInformations.sharedInstance.requestData(completionHandler: { result, error in
+            guard error == nil else {
+                
+                let alert = UIAlertController(title: "Error", message:error, preferredStyle: UIAlertControllerStyle.alert)
+                
+                alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
+                    
+                    alert.dismiss(animated: true, completion: nil)
+                    
+                }))
+                
+                
+                
+                self.present(alert, animated: true, completion: nil)
+                return
+            }
+        })
         
     }
     
     @objc private func logout() {
-        
-        print("logout base")
-        
         performUIUpdatesOnMain {
-            self.view.window!.rootViewController?.dismiss(animated: false, completion: nil)
-
-            return
+            self.performSegue(withIdentifier: "logoutSegue", sender: self)
         }
-        
-        
     }
 }

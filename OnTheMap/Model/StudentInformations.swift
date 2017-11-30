@@ -27,15 +27,20 @@ class StudentInformations {
         
     }
     
-    func requestData() {
+    func requestData(completionHandler: @escaping(_ result: [StudentInformation]?, _ error: String?) -> Void) {
         ParseClient.sharedInstance().getStudentLocations(completionHandler: { result, error in
             
             guard  error == nil else {
+                
+                completionHandler(nil, error)
                 
                 return
             }
             
             self.data = result!
+            
+            completionHandler(result, nil)
+
             
         })
         

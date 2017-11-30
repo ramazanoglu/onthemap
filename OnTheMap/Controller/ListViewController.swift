@@ -13,12 +13,9 @@ class ListViewController: BaseViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var studentsTableView: UITableView!
     
     
-    var studentsInformations = [StudentInformation]()
-    
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return studentsInformations.count
+        return (StudentInformations.sharedInstance.data?.count)!
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -26,11 +23,11 @@ class ListViewController: BaseViewController, UITableViewDelegate, UITableViewDa
         
         // set the text from the data model
         
-            let firstName = self.studentsInformations[indexPath.row].firstName ?? ""
-            let lastName = self.studentsInformations[indexPath.row].lastName ?? ""
+        let firstName = StudentInformations.sharedInstance.data![indexPath.row].firstName ?? ""
+        let lastName = StudentInformations.sharedInstance.data![indexPath.row].lastName ?? ""
         
             cell.nameLabel.text = firstName + " " + lastName
-            cell.linkLabel.text = self.studentsInformations[indexPath.row].mediaUrl ?? ""
+        cell.linkLabel.text = StudentInformations.sharedInstance.data![indexPath.row].mediaUrl ?? ""
         return cell
         
     }
@@ -40,9 +37,9 @@ class ListViewController: BaseViewController, UITableViewDelegate, UITableViewDa
         let currentCell = tableView.cellForRow(at: indexPath)
         currentCell?.isSelected = false
         
-        print(studentsInformations[indexPath.row])
+        print(StudentInformations.sharedInstance.data![indexPath.row])
         
-        if let url = URL(string: studentsInformations[indexPath.row].mediaUrl!) {
+        if let url = URL(string: StudentInformations.sharedInstance.data![indexPath.row].mediaUrl!) {
             UIApplication.shared.open(url, options: [:])
         }
         
@@ -59,14 +56,11 @@ class ListViewController: BaseViewController, UITableViewDelegate, UITableViewDa
     }
     
     @objc private func getDataUpdate() {
-        if let data = StudentInformations.sharedInstance.data {
-            self.studentsInformations = data
-            
+       
             performUIUpdatesOnMain {
                 self.studentsTableView.reloadData()
             }
             
-        }
         
     }
     

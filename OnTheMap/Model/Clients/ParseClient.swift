@@ -174,8 +174,19 @@ class ParseClient : NSObject {
         let session = URLSession.shared
         let task = session.dataTask(with: request) { data, response, error in
             if error != nil {
-                sendError("There was an error with your request: \(error!)")
-                return
+                if let error = error as NSError? {
+                    if (error.code == CFNetworkErrors.cfurlErrorTimedOut.rawValue || error.code == CFNetworkErrors.cfurlErrorNotConnectedToInternet.rawValue || error.code == CFNetworkErrors.cfurlErrorNetworkConnectionLost.rawValue) {
+                        sendError("Please check your internet connection")
+                    } else {
+                        sendError(error.localizedDescription)
+                    }
+                    
+                    return
+                } else {
+                    
+                    sendError(error!.localizedDescription)
+                    return
+                }
             }
             
             guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 200 && statusCode <= 299 else {

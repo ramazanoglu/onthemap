@@ -29,10 +29,21 @@ class UdacityClient : NSObject {
         
         let session = URLSession.shared
         let task = session.dataTask(with: request) { data, response, error in
-           
+            
             if error != nil { // Handle error…
-                sendError("There was an error with your request: \(error!)")
-                return
+                if let error = error as NSError? {
+                    if (error.code == CFNetworkErrors.cfurlErrorTimedOut.rawValue || error.code == CFNetworkErrors.cfurlErrorNotConnectedToInternet.rawValue || error.code == CFNetworkErrors.cfurlErrorNetworkConnectionLost.rawValue) {
+                        sendError("Please check your internet connection")
+                    } else {
+                        sendError(error.localizedDescription)
+                    }
+                    
+                    return
+                } else {
+                    
+                    sendError(error!.localizedDescription)
+                    return
+                }
             }
             
             guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 200 && statusCode <= 299 else {
@@ -115,12 +126,12 @@ class UdacityClient : NSObject {
             if error != nil { // Handle error…
                 
                 print(error?.localizedDescription)
-
+                
                 completionHandler(nil, "Logout failed")
                 
                 return
             }
-             guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 200 && statusCode <= 299 else {
+            guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 200 && statusCode <= 299 else {
                 completionHandler(nil, "Logout failed")
                 return
             }
@@ -130,10 +141,10 @@ class UdacityClient : NSObject {
             print(String(data: newData!, encoding: .utf8)!)
             
             completionHandler("Logout", nil)
-
+            
         }
         task.resume()
-
+        
     }
     
     func getUdacityUser(userId: String) {
@@ -144,7 +155,7 @@ class UdacityClient : NSObject {
             if error != nil { // Handle error...
                 return
             }
-           
+            
             let parsedResult = self.extractJSON(data: data!)
             
             guard parsedResult != nil else {
@@ -180,7 +191,7 @@ class UdacityClient : NSObject {
             parsedResult = try JSONSerialization.jsonObject(with: self.clearUdacityResponse(data: data), options: .allowFragments) as! [String:AnyObject]
             
         } catch {
-           
+            
             return nil
         }
         
