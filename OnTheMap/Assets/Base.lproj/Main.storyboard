@@ -182,7 +182,6 @@
                     <connections>
                         <outlet property="studentsTableView" destination="NCP-fe-L7Y" id="fiI-2c-WlA"/>
                         <segue destination="R3P-4o-6ts" kind="presentation" identifier="addLocationSegue" id="CMa-AJ-MC5"/>
-                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="logoutSegue" id="Gq5-KZ-S3I"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LAy-zm-DVo" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -389,7 +388,6 @@
                     <connections>
                         <outlet property="mapView" destination="AZ4-ZN-HVx" id="w5r-dv-6Tu"/>
                         <segue destination="R3P-4o-6ts" kind="presentation" identifier="addLocationSegue" id="fvG-7K-aec"/>
-                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="logoutSegue" id="aLF-F4-Yf6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wK3-sO-7th" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -425,6 +423,5 @@
     <inferredMetricsTieBreakers>
         <segue reference="aGf-X4-3zo"/>
         <segue reference="CMa-AJ-MC5"/>
-        <segue reference="Gq5-KZ-S3I"/>
     </inferredMetricsTieBreakers>
 </document>

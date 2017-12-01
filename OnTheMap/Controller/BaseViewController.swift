@@ -47,8 +47,6 @@ class BaseViewController: UIViewController {
                     
                 }))
                 
-                
-                
                 self.present(alert, animated: true, completion: nil)
                 return
             }
@@ -58,7 +56,7 @@ class BaseViewController: UIViewController {
     
     @objc private func logout() {
         performUIUpdatesOnMain {
-            self.performSegue(withIdentifier: "logoutSegue", sender: self)
+            self.dismiss(animated: true, completion: nil)
         }
     }
 }
