@@ -26,7 +26,7 @@ class ListViewController: BaseViewController, UITableViewDelegate, UITableViewDa
         let firstName = StudentInformations.sharedInstance.data![indexPath.row].firstName ?? ""
         let lastName = StudentInformations.sharedInstance.data![indexPath.row].lastName ?? ""
         
-            cell.nameLabel.text = firstName + " " + lastName
+        cell.nameLabel.text = firstName + " " + lastName
         cell.linkLabel.text = StudentInformations.sharedInstance.data![indexPath.row].mediaUrl ?? ""
         return cell
         
@@ -40,10 +40,28 @@ class ListViewController: BaseViewController, UITableViewDelegate, UITableViewDa
         print(StudentInformations.sharedInstance.data![indexPath.row])
         
         if let url = URL(string: StudentInformations.sharedInstance.data![indexPath.row].mediaUrl!) {
-            UIApplication.shared.open(url, options: [:])
+            if(UIApplication.shared.canOpenURL(url)) {
+                UIApplication.shared.open(url, options: [:])
+            } else {
+                showAlert(message: "Cannot open the url")
+            }
+        } else {
+            showAlert(message: "Cannot open the url")
         }
         
         
+    }
+    
+    func showAlert(message: String) {
+        let alert = UIAlertController(title: "Error", message:message, preferredStyle: UIAlertControllerStyle.alert)
+        
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
+            
+            alert.dismiss(animated: true, completion: nil)
+            
+        }))
+        
+        self.present(alert, animated: true, completion: nil)
     }
     
     override func viewDidLoad() {
@@ -56,11 +74,11 @@ class ListViewController: BaseViewController, UITableViewDelegate, UITableViewDa
     }
     
     @objc private func getDataUpdate() {
-       
-            performUIUpdatesOnMain {
-                self.studentsTableView.reloadData()
-            }
-            
+        
+        performUIUpdatesOnMain {
+            self.studentsTableView.reloadData()
+        }
+        
         
     }
     

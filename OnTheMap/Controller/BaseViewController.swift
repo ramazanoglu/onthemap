@@ -39,15 +39,7 @@ class BaseViewController: UIViewController {
         StudentInformations.sharedInstance.requestData(completionHandler: { result, error in
             guard error == nil else {
                 
-                let alert = UIAlertController(title: "Error", message:error, preferredStyle: UIAlertControllerStyle.alert)
-                
-                alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
-                    
-                    alert.dismiss(animated: true, completion: nil)
-                    
-                }))
-                
-                self.present(alert, animated: true, completion: nil)
+                self.showAlert(error: error!)
                 return
             }
         })
@@ -55,8 +47,31 @@ class BaseViewController: UIViewController {
     }
     
     @objc private func logout() {
-        performUIUpdatesOnMain {
-            self.dismiss(animated: true, completion: nil)
-        }
+        UdacityClient.sharedInstance().deleteSession(completionHandler: ({data, error in
+
+            
+            performUIUpdatesOnMain {
+                if error == nil {
+                    self.dismiss(animated: true, completion: nil)
+                } else {
+                    self.showAlert(error: error!)
+                }
+            }
+            
+        }))
+        
     }
+    
+    func showAlert(error: String) {
+        let alert = UIAlertController(title: "Error", message:error, preferredStyle: UIAlertControllerStyle.alert)
+        
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
+            
+            alert.dismiss(animated: true, completion: nil)
+            
+        }))
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+    
 }

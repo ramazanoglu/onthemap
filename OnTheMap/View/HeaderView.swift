@@ -13,7 +13,7 @@ class HeaderView: UIView {
     let notificationId = "headerViewAddPinNotification"
     let logoutNotificationId = "headerViewLogoutNotification"
     let refreshNotificationId = "headerViewRefreshNotification"
-
+    
     
     @IBOutlet var contentView: UIView!
     /*
@@ -49,12 +49,8 @@ class HeaderView: UIView {
     @IBAction func logout(_ sender: Any) {
         print("logout")
         
-        UdacityClient.sharedInstance().deleteSession(completionHandler: ({data, error in
-            
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: self.logoutNotificationId), object: nil)
-            
-        }))
-
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: self.logoutNotificationId), object: nil)
+        
     }
     
     @IBAction func refresh(_ sender: Any) {

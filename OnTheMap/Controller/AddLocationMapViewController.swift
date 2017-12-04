@@ -96,8 +96,7 @@ class AddLocationMapViewController: UIViewController, MKMapViewDelegate {
                     
                 } else {
                     
-                    self.performSegue(withIdentifier: "postSuccessSegue", sender: self)
-                    
+                    self.presentingViewController!.presentingViewController!.dismiss(animated: true, completion: nil)
                 }
             }
         }))

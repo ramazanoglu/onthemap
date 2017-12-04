@@ -298,7 +298,7 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                                 <items>
                                     <navigationItem title="Add Location" id="nC2-hz-ZYT" userLabel="Add Location">
-                                        <barButtonItem key="leftBarButtonItem" title="Add Location" id="fDd-2W-uad" userLabel="Add Location Button">
+                                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="fDd-2W-uad" userLabel="Add Location Button">
                                             <connections>
                                                 <action selector="backClicked:" destination="pD2-Hf-xjT" id="Efq-H2-x8y"/>
                                             </connections>
@@ -344,7 +344,6 @@
                     <connections>
                         <outlet property="errorLabel" destination="FSF-M9-Bzg" id="IBD-cK-aUv"/>
                         <outlet property="mapView" destination="cQn-MB-J3m" id="1VY-hD-Mkm"/>
-                        <segue destination="ftn-Vf-Jmc" kind="presentation" identifier="postSuccessSegue" id="aGf-X4-3zo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AdW-oK-YnK" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -421,7 +420,6 @@
         <image name="logo-u" width="62" height="62"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="aGf-X4-3zo"/>
         <segue reference="CMa-AJ-MC5"/>
     </inferredMetricsTieBreakers>
 </document>

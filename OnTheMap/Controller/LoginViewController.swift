@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
@@ -21,13 +21,10 @@ class LoginViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         
         activityIndicatorView.alpha = 0
+        
+        passwordTextField.delegate = self
+        emailTextField.delegate = self
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
     
     @IBAction func loginClicked(_ sender: UIButton) {
         
@@ -66,6 +63,12 @@ class LoginViewController: UIViewController {
         })
         
     }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool { 
+        textField.resignFirstResponder()
+        return true
+    }
+
     
     func displayError(_ errorString: String?) {
         if let errorString = errorString {

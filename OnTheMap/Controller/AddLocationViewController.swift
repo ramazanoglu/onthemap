@@ -9,7 +9,7 @@
 import UIKit
 import CoreLocation
 
-class AddLocationViewController: UIViewController {
+class AddLocationViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var locationTextField: UITextField!
     
@@ -36,7 +36,17 @@ class AddLocationViewController: UIViewController {
     
     override func viewDidLoad() {
         updateActivityIndicatorView(isActive: false)
+        
+        locationTextField.delegate = self
+        linkTextField.delegate = self
+        
     }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+
     
     
     @IBAction func findLocationClicked(_ sender: Any) {
